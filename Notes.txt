@@ -1,0 +1,2 @@
+Extract first line of text from a cell:
+=LEFT(A2, SEARCH(CHAR(10), A2)-1)

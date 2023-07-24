@@ -1,7 +1,6 @@
-# Database---Bartender---Spicers-Mill
-CData Database for Bartender Software
-Contains 2022 Inventory:
-- SKU
+# Database---Bartender---Spicers_Mill
+CData Database for Bartender Software containing:
+- SKUs
 - Ingredients
 - Barcodes
-- Product WT
+- Product Net WTs

@@ -1,0 +1,39 @@
+﻿<IntegrationFile Name="NewPart" Version="5" ID="f9e23a5e-0e8b-42e3-82d1-fa9b6f1ec277">
+  <ActionGroup ID="8de158d8-dddf-4883-9141-1fd8c22adff1" RunMethod="Sequential" MessagingEnabled="false">
+    <Actions>
+      <FileTriggerIntegration Name="Each Part" ID="3310171b-7872-4856-af48-929823859ba1" IgnoreErrors="true" Filter="*.txt" DetectionAction="Delete" DetectionExtension="dat" LockedFileTimeout="30000">
+        <ActionGroup ID="a113ccbf-a06b-45f1-952f-fbfcbaa630b4" RunMethod="Sequential" MessagingEnabled="false">
+          <Actions>
+            <PrintAction Name="Print Document" ID="464020ed-bc7d-4874-bcc0-4f850e29f4f8" IgnoreErrors="false" Document="%IntegrationFileFolder%BarTender Files\Serialized.btw" UseDatabase="false" NamedDataSourcePrefix="BTDS_" />
+          </Actions>
+        </ActionGroup>
+        <ScanFolder Path="%IntegrationFileFolder%Scan Folder" />
+        <MoveToFolder Path="C:\" />
+        <FailureMoveToFolder Path="C:\" />
+      </FileTriggerIntegration>
+    </Actions>
+  </ActionGroup>
+  <Metadata>
+    <Properties>
+      <Properties Name="BuilderName" Type="Seagull.Framework.Serialization.SerializableString">
+        <Value>TaskListToIntegrationFileConverter</Value>
+      </Properties>
+      <Properties Name="BuilderVersion" Type="System.Double">
+        <Value>1</Value>
+      </Properties>
+      <Properties Name="MostRecentlyUsedVariables" Type="System.String">
+        <Value>EventData</Value>
+      </Properties>
+      <Properties Name="SelectedDeploymentConfiguration" Type="System.String">
+        <Value>Custom</Value>
+      </Properties>
+      <Properties Name="SelectedIntegration" Type="System.Int32">
+        <Value>0</Value>
+      </Properties>
+      <Properties Name="SelectedOptionsPage" Type="System.String">
+        <Value>1;0</Value>
+      </Properties>
+    </Properties>
+  </Metadata>
+  <SourcePath>C:\Users\SeagullVM\Documents\BarTender\Integration Builder\Empty File Integration\NewPart.btin</SourcePath>
+</IntegrationFile>

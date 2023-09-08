@@ -1,0 +1,55 @@
+﻿<IntegrationFile Version="5" ID="b35eccac-87b0-4fcc-975e-7abe0e98c629">
+  <ActionGroup Name="IntegrationFileActionGroup" ID="33d72a02-2547-4767-858e-70c74f9bbb7d" RunMethod="Sequential" MessagingEnabled="false">
+    <Actions>
+      <SocketIntegration Name="Print 100" ID="7462649f-405f-45c4-b497-61ea4a22ca5f" IgnoreErrors="true">
+        <ActionGroup ID="8de7e1cb-9725-4ff4-ae6a-21334fd856eb" RunMethod="Sequential" MessagingEnabled="false">
+          <Actions>
+            <BarTenderBatchAction Name="Print BTXML Script" ID="93086efd-469c-4bea-9e53-b1cd67e7bb2f" IgnoreErrors="false" BatchScriptTimeout="-1">
+              <Description>Print 100 Serialized Labels</Description>
+              <BatchXml>
+                <Value>%EventData%</Value>
+              </BatchXml>
+            </BarTenderBatchAction>
+          </Actions>
+        </ActionGroup>
+        <ContentData ContentDataType="BTXML" />
+        <TriggerEvent.CharacterSequence IncludeInStreamData="true">
+          <CharacterSequence>&lt;/XMLScript&gt;</CharacterSequence>
+        </TriggerEvent.CharacterSequence>
+      </SocketIntegration>
+    </Actions>
+  </ActionGroup>
+  <Metadata>
+    <Properties>
+      <Properties Name="MostRecentlyUsedVariables" Type="System.String">
+        <Value>EventData</Value>
+      </Properties>
+      <Properties Name="SelectedDeploymentConfiguration" Type="System.String">
+        <Value>Custom</Value>
+      </Properties>
+      <Properties Name="SelectedIntegration" Type="System.Int32">
+        <Value>0</Value>
+      </Properties>
+      <Properties Name="SelectedOptionsPage" Type="System.String">
+        <Value>1;0</Value>
+      </Properties>
+    </Properties>
+  </Metadata>
+  <SourcePath>C:\Users\SeagullVM\Documents\BarTender\Integration Builder\BTXML Over a network Socket Integration\BTXML Integration.btin</SourcePath>
+  <DeploymentConfigurations>
+    <DeploymentConfiguration CancelIfIntegrationFileExistsOnTargetServer="false">
+      <Name>Test</Name>
+      <TargetServers>
+        <TargetServer Name="This Computer" Description="" IsServerGroup="false" />
+      </TargetServers>
+      <DeploymentSchedule Method="Immediately" />
+    </DeploymentConfiguration>
+    <DeploymentConfiguration CancelIfIntegrationFileExistsOnTargetServer="false">
+      <Name>Production</Name>
+      <TargetServers>
+        <TargetServer Name="This Computer" Description="" IsServerGroup="false" />
+      </TargetServers>
+      <DeploymentSchedule Method="OnSpecifiedDate" />
+    </DeploymentConfiguration>
+  </DeploymentConfigurations>
+</IntegrationFile>

@@ -1,0 +1,115 @@
+﻿<IntegrationFile Version="5" ID="e019e132-bf25-4324-9d90-d937165db966">
+  <ActionGroup Name="IntegrationFileActionGroup" ID="40385c63-ed40-407f-a46e-ed38834e6e2b" RunMethod="Sequential" MessagingEnabled="false">
+    <Actions>
+      <DatabaseIntegration Name="Database Integration" ID="7ee5806b-7d5f-47b9-8e3e-297c41050037" IgnoreErrors="true" PollInterval="3000">
+        <Variables>
+          <Variable Name="__internal_UIMetaData_{10197317-68C1-4B0D-9BA4-0D5FEC3B6338}__" Type="Seagull.Integrations.VariableDictionary">
+            <Value>
+              <Variable Name="CanSupportUpdate" Type="System.Boolean">
+                <Value>false</Value>
+              </Variable>
+              <Variable Name="TableSchema" Type="System.Data.DataTable">
+                <Value>
+                  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+                    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="Table_1" msdata:UseCurrentLocale="true">
+                      <xs:complexType>
+                        <xs:choice minOccurs="0" maxOccurs="unbounded">
+                          <xs:element name="Table_1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="ID" msdata:AutoIncrement="true" type="xs:long" minOccurs="0" />
+                                <xs:element name="Company_x0020_Name" minOccurs="0">
+                                  <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                      <xs:maxLength value="255" />
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:choice>
+                      </xs:complexType>
+                      <xs:unique name="Constraint1">
+                        <xs:selector xpath=".//Table_1" />
+                        <xs:field xpath="ID" />
+                      </xs:unique>
+                    </xs:element>
+                  </xs:schema>
+                  <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1" />
+                </Value>
+              </Variable>
+            </Value>
+          </Variable>
+        </Variables>
+        <ActionGroup ID="90d13bfb-a6a2-4a90-9777-c4ae49e11d22" RunMethod="Sequential" MessagingEnabled="false">
+          <Actions>
+            <ForEachDatabaseRecordAction Name="For Each Database Record" ID="37162784-5930-45b1-8ecf-44f59d75e72b" RunMethod="Sequential" MessagingEnabled="false" FieldVariableNamePrefix="db">
+              <Actions>
+                <PrintAction Name="Print Document" ID="8b37a951-fe2d-45c4-9e97-d988c938769a" IgnoreErrors="false" Document="%IntegrationFileFolder%BarTender Files\CompanyList.btw" UseDatabase="false" NamedDataSourcePrefix="BTDS_">
+                  <NamedDataSources>
+                    <Field Name="CompanyName">%dbCompanyName%</Field>
+                    <Field Name="IDnumber">%dbIDNumber%</Field>
+                  </NamedDataSources>
+                </PrintAction>
+              </Actions>
+              <RecordSet.DataTarget>
+                <Value>%EventData%</Value>
+              </RecordSet.DataTarget>
+            </ForEachDatabaseRecordAction>
+          </Actions>
+        </ActionGroup>
+        <ConnectionInfo>&lt;?xml version="1.0" encoding="utf-8"?&gt;&#xD;
+&lt;DatabaseSetup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;&#xD;
+  &lt;DatabaseConnections&gt;&#xD;
+    &lt;DatabaseConnection Name="@1" Type="AccessCData"&gt;data source="BarTender Files\TestDB.accdb";other="ConnectOnOpen=true"&lt;/DatabaseConnection&gt;&#xD;
+  &lt;/DatabaseConnections&gt;&#xD;
+  &lt;RecordSets&gt;&#xD;
+    &lt;RecordSet Name="TestDB" Connection="@1" Primary="true"&gt;&#xD;
+      &lt;SelectCommand Custom="false"&gt;SELECT `ID`, `Company Name` FROM `Access`.`Table_1`&lt;/SelectCommand&gt;&#xD;
+      &lt;ProviderParameters&gt;&lt;/ProviderParameters&gt;&#xD;
+      &lt;LastKnownSchema&gt;&#xD;
+        &lt;Field Name="[TestDB].[Table_1].[ID]" Type="Int64" /&gt;&#xD;
+        &lt;Field Name="[TestDB].[Table_1].[Company Name]" Type="String" /&gt;&#xD;
+      &lt;/LastKnownSchema&gt;&#xD;
+    &lt;/RecordSet&gt;&#xD;
+  &lt;/RecordSets&gt;&#xD;
+&lt;/DatabaseSetup&gt;</ConnectionInfo>
+        <DbDetectionMethod.FieldIncreasing FieldName="ID" DefaultLastValue="21" />
+      </DatabaseIntegration>
+    </Actions>
+  </ActionGroup>
+  <Metadata>
+    <Properties>
+      <Properties Name="MostRecentlyUsedVariables" Type="System.String">
+        <Value>EventData</Value>
+      </Properties>
+      <Properties Name="SelectedDeploymentConfiguration" Type="System.String">
+        <Value>Custom</Value>
+      </Properties>
+      <Properties Name="SelectedIntegration" Type="System.Int32">
+        <Value>0</Value>
+      </Properties>
+      <Properties Name="SelectedOptionsPage" Type="System.String">
+        <Value>0;0</Value>
+      </Properties>
+    </Properties>
+  </Metadata>
+  <SourcePath>C:\Users\SeagullVM\Documents\BarTender\Integration Builder\Database Integration\DatabaseIntegration.btin</SourcePath>
+  <DeploymentConfigurations>
+    <DeploymentConfiguration CancelIfIntegrationFileExistsOnTargetServer="false">
+      <Name>Test</Name>
+      <TargetServers>
+        <TargetServer Name="This Computer" Description="" IsServerGroup="false" />
+      </TargetServers>
+      <DeploymentSchedule Method="Immediately" />
+    </DeploymentConfiguration>
+    <DeploymentConfiguration CancelIfIntegrationFileExistsOnTargetServer="false">
+      <Name>Production</Name>
+      <TargetServers>
+        <TargetServer Name="This Computer" Description="" IsServerGroup="false" />
+      </TargetServers>
+      <DeploymentSchedule Method="OnSpecifiedDate" />
+    </DeploymentConfiguration>
+  </DeploymentConfigurations>
+</IntegrationFile>

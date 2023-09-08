@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XMLScript Version="2.0">
+	<Command>
+		<Print JobName="Job1">
+			<Format>%IntegrationFileFolder%BarTender Files\Scriptdoc.btw</Format>
+			<PrintSetup>
+				<NumberSerializedLabels>100</NumberSerializedLabels>
+				<Printer>HP LaserJet</Printer>
+				<PaperTray>Tray 1</PaperTray>
+			</PrintSetup>
+		</Print>
+	</Command>
+</XMLScript>

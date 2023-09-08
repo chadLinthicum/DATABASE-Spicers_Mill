@@ -1,0 +1,4 @@
+%BTW% /AF="%IntegrationFileFolder%BarTender Files\HardwareInvoice.btw" /D="%Trigger File Name%" /PRN="Zebra R110Xi4 (300 dpi)" /R=3 /P /DD
+%END%
+BusinessName,ContactName,Position,Address1,City,State,Zip,Country,Phone1,Phone2
+Around the Town,Jerome Davis,Buyer,1220 Governor Sq.,Hadden,Alberta,WA1 1DP,Canada,(171) 555-7788,(171) 555-6750

@@ -1,0 +1,92 @@
+﻿<IntegrationFile Version="5" ID="2d24cf82-c385-4f71-97cf-dbccf7501ecd">
+  <ActionGroup Name="IntegrationFileActionGroup" ID="9a3a875b-76e9-4a2d-ac80-35c726a96cac" RunMethod="Sequential" MessagingEnabled="false">
+    <Actions>
+      <FileTriggerIntegration Name="File Integration" ID="41fa06c3-e33b-4252-809d-2b092c8ec5b8" IgnoreErrors="true" Filter="*.csv" DetectionExtension="txt">
+        <ActionGroup ID="90057b36-2b08-4a3a-a0b8-ebe98d620508" RunMethod="Sequential" MessagingEnabled="false">
+          <Actions>
+            <TransformTextToRecordSetAction Name="Transform Text To Record Set" ID="1fd1c7c3-1649-4a74-adf9-09f30c2d713f" IgnoreErrors="false">
+              <ConnectionInfo>&lt;?xml version="1.0" encoding="utf-8"?&gt;&#xD;
+&lt;DatabaseSetup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;&#xD;
+  &lt;DatabaseConnections&gt;&#xD;
+    &lt;DatabaseConnection Name="@1" Type="TextFile"&gt;codepage=20127;pathname="BarTender Files\Sample CSV.csv";format=CSV;fieldsquoted=false;field count=9;first record is header=False&lt;/DatabaseConnection&gt;&#xD;
+  &lt;/DatabaseConnections&gt;&#xD;
+  &lt;RecordSets&gt;&#xD;
+    &lt;RecordSet Name="Sample CSV" Connection="@1" Primary="true"&gt;&#xD;
+      &lt;SelectCommand Custom="false"&gt;SELECT * FROM [Sample CSV]&lt;/SelectCommand&gt;&#xD;
+      &lt;ProviderParameters&gt;&lt;/ProviderParameters&gt;&#xD;
+      &lt;LastKnownSchema&gt;&#xD;
+        &lt;Field Name="[Sample CSV].[Sample CSV].[__field__1]" Type="String" /&gt;&#xD;
+        &lt;Field Name="[Sample CSV].[Sample CSV].[__field__2]" Type="String" /&gt;&#xD;
+        &lt;Field Name="[Sample CSV].[Sample CSV].[__field__3]" Type="String" /&gt;&#xD;
+        &lt;Field Name="[Sample CSV].[Sample CSV].[__field__4]" Type="String" /&gt;&#xD;
+        &lt;Field Name="[Sample CSV].[Sample CSV].[__field__5]" Type="String" /&gt;&#xD;
+        &lt;Field Name="[Sample CSV].[Sample CSV].[__field__6]" Type="String" /&gt;&#xD;
+        &lt;Field Name="[Sample CSV].[Sample CSV].[__field__7]" Type="String" /&gt;&#xD;
+        &lt;Field Name="[Sample CSV].[Sample CSV].[__field__8]" Type="String" /&gt;&#xD;
+        &lt;Field Name="[Sample CSV].[Sample CSV].[__field__9]" Type="String" /&gt;&#xD;
+      &lt;/LastKnownSchema&gt;&#xD;
+    &lt;/RecordSet&gt;&#xD;
+  &lt;/RecordSets&gt;&#xD;
+&lt;/DatabaseSetup&gt;</ConnectionInfo>
+              <Text>
+                <Value>%EventData%</Value>
+              </Text>
+            </TransformTextToRecordSetAction>
+            <ForEachDatabaseRecordAction Name="For Each Database Record" ID="80e87bdd-97fd-4adf-9c20-bc5b8e4f9bea" RunMethod="Sequential" MessagingEnabled="false">
+              <Actions>
+                <PrintAction Name="Print Document" ID="e2fbf0e6-9c22-4f27-bd08-9c94083f311d" IgnoreErrors="false" Document="%IntegrationFileFolder%Bartender Files\Shipping Label.btw" Printer="%PrinterName%" CopiesPerSerialNumber="1" UseDatabase="false" NamedDataSourcePrefix="BTDS_">
+                  <NamedDataSources>
+                    <Field Name="Ship-To-Address">%ShipToAddress%</Field>
+                    <Field Name="Ship-To-Name">%ShipToName%</Field>
+                    <Field Name="Ship-To-Zip">%ShipToZip%</Field>
+                    <Field Name="Store-Num">%StoreNumber%</Field>
+                    <Field Name="UPC-Code">%UPCCode%</Field>
+                    <Field Name="Ship-To-State">%ShipToState%</Field>
+                    <Field Name="Ship-To-City">%ShipToCity%</Field>
+                  </NamedDataSources>
+                </PrintAction>
+              </Actions>
+              <RecordSet.DataTarget>
+                <Value>%EventData%</Value>
+              </RecordSet.DataTarget>
+            </ForEachDatabaseRecordAction>
+          </Actions>
+        </ActionGroup>
+        <ScanFolder Path="%IntegrationFileFolder%Scan Folder" />
+      </FileTriggerIntegration>
+    </Actions>
+  </ActionGroup>
+  <Metadata>
+    <Properties>
+      <Properties Name="MostRecentlyUsedVariables" Type="System.String">
+        <Value>EventData</Value>
+      </Properties>
+      <Properties Name="SelectedDeploymentConfiguration" Type="System.String">
+        <Value>Custom</Value>
+      </Properties>
+      <Properties Name="SelectedIntegration" Type="System.Int32">
+        <Value>0</Value>
+      </Properties>
+      <Properties Name="SelectedOptionsPage" Type="System.String">
+        <Value>1;1;0</Value>
+      </Properties>
+    </Properties>
+  </Metadata>
+  <SourcePath>C:\Users\SeagullVM\Documents\BarTender\Integration Builder\File Integration using a CSV file\IntegrationFile.btin</SourcePath>
+  <DeploymentConfigurations>
+    <DeploymentConfiguration CancelIfIntegrationFileExistsOnTargetServer="false">
+      <Name>Test</Name>
+      <TargetServers>
+        <TargetServer Name="This Computer" Description="" IsServerGroup="false" />
+      </TargetServers>
+      <DeploymentSchedule Method="Immediately" />
+    </DeploymentConfiguration>
+    <DeploymentConfiguration CancelIfIntegrationFileExistsOnTargetServer="false">
+      <Name>Production</Name>
+      <TargetServers>
+        <TargetServer Name="This Computer" Description="" IsServerGroup="false" />
+      </TargetServers>
+      <DeploymentSchedule Method="OnSpecifiedDate" />
+    </DeploymentConfiguration>
+  </DeploymentConfigurations>
+</IntegrationFile>
